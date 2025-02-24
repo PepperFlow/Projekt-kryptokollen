@@ -1,9 +1,0 @@
-# Ignorera miljöfil
-.env
-
-# Ignorera cachefiler
-__pycache__/
-*.pyc
-
-# Ignorera eventuella loggar
-*.log
