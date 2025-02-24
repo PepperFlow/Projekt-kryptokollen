@@ -6,4 +6,9 @@ import streamlit as st
 
 print("Alla paket fungerar!")
 
-Print("Wuttichai_Branch")
+print("Wuttichai_Branch")
+
+print("ddd")
+
+print("ss")
+
