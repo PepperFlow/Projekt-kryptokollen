@@ -1,7 +1,8 @@
 import sys
 import os
 
-sys.path.append('C:/Users/Brukare/Desktop/github/data_enginer_trion/src')
+sys.path.append("C:\\Users\\Brukare\\Desktop\\github\\Projekt-kryptokollen-main\\src")
+
 
 
 import streamlit as st  
@@ -10,7 +11,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 from constants.constants import (POSTGRES_DBNAME, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER)
 from rates_api import fetch_exchange_rates
-from print_crypto_info import crypto_info
+from streamlit_dash.coin_info import crypto_info
  
  
 currency = ["SEK", "NOK", "DKK", "EUR", "USD", "ISK"]
@@ -27,21 +28,15 @@ def load_data(query):
 refresh = st_autorefresh(interval=30 *1000, limit= 100)
     
 def main():
-    st.markdown("# Crypto currency Cardano and Ethereum")
+    st.markdown("# Crypto currency Cardano")
     
     table = (st.selectbox("Select cryptocurrency", ("Cardano", "Ethereum")))
     
-    if table == "Polkadot":
-        df = load_data("SELECT * FROM ethereum;")
-        df = df.tail(15)
-        
-        st.markdown("### Streaming data for Ethereum(ETH) from coinmarket")
     
-    else:
-        df = load_data("SELECT * FROM cardano;")
-        df = df.tail(15)
+    df = load_data("SELECT * FROM cardano;")
+    df = df.tail(15)
     
-        st.markdown("### Streaming data for Cardano(ADA) from coinmarket")
+    st.markdown("### Streaming data for Cardano")
     
     currency_code = st.selectbox("Select currency", currency)
     st.markdown(f"### Price change over time  for {table}")

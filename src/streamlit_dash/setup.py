@@ -13,5 +13,5 @@ setup(
     author_email="YOUR_EMAIL@mail.com",
     install_requires=[],
     packages=find_packages(exclude=("EDA")),
-    # entry_points={"console_scripts": ["dashboard = utils.run_dashboard:run_dashboard"]},
+    entry_points={"console_scripts": ["dashboard = utils.run_dashboard:run_dashboard"]},
 )
