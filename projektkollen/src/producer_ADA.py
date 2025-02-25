@@ -1,14 +1,18 @@
 import os
 import sys
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "C:/Users/Brukare/Desktop/github/data_enginer_trion/src")))
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "C:/Users/Brukare/Desktop/github/data_enginer_trion/src")))
 
 import time
 from quixstreams import Application  
 import json
 from pprint import pprint
-from producer.connect_api import get_latest_coin_data
- 
+from connect_api import get_latest_coin_data
+
+
+
+
+
 TARGET_COIN = "ADA"
  
 def main():

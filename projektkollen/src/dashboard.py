@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append("C:\\Users\\Brukare\\Desktop\\github\\Projekt-kryptokollen-main\\src")
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 
 
@@ -9,9 +9,9 @@ import streamlit as st
 from streamlit_autorefresh import st_autorefresh
 from sqlalchemy import create_engine
 import pandas as pd
-from constants.constants import (POSTGRES_DBNAME, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER)
+from constants import (POSTGRES_DBNAME, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER)
 from rates_api import fetch_exchange_rates
-from streamlit_dash.coin_info import crypto_info
+from coin_info import crypto_info
  
  
 currency = ["SEK", "NOK", "DKK", "EUR", "USD", "ISK"]

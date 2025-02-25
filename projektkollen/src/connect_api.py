@@ -1,7 +1,7 @@
 import sys
 import os
 
-from constants.constants import API_KEY
+from constants import API_KEY
 
 from requests import Session, Timeout, TooManyRedirects
 import requests  

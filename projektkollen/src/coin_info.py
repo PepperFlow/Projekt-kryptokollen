@@ -1,6 +1,6 @@
 import streamlit as st
 from millify import millify
-from charts import line_chart
+from projektkollen.src.charts import line_chart
 import matplotlib.pyplot as plt
  
 def crypto_info(df, currency_code, currency_rate=1):
