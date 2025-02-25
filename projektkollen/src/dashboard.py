@@ -10,14 +10,14 @@ from streamlit_autorefresh import st_autorefresh
 from sqlalchemy import create_engine
 import pandas as pd
 from constants import (POSTGRES_DBNAME, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER)
-from rates_api import fetch_exchange_rates
+from coin_info import fetch_exchange_rates
 from coin_info import crypto_info
  
  
-currency = ["SEK", "NOK", "DKK", "EUR", "USD", "ISK"]
-connection_string = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DBNAME}"
+currencies = ["SEK", "NOK", "DKK", "EUR", "USD", "ISK"]
+connection_url = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DBNAME}"
  
-engine = create_engine(connection_string)
+engine = create_engine(connection_url)
  
 def load_data(query):
     with engine.connect() as conn:
@@ -25,24 +25,24 @@ def load_data(query):
         df = df.set_index("timestamp")
         return df
            
-refresh = st_autorefresh(interval=30 *1000, limit= 100)
+auto_refresh = st_autorefresh(interval=45*1000, limit= 100)
     
 def main():
-    st.markdown("# Crypto currency Cardano")
+    st.markdown("# Crypto info for cardano")
     
-    table = (st.selectbox("Select cryptocurrency", ("Cardano", "Ethereum")))
+    selected_coin = (st.selectbox("Select cryptocurrency", ("Cardano")))
     
     
     df = load_data("SELECT * FROM cardano;")
     df = df.tail(15)
     
-    st.markdown("### Streaming data for Cardano")
+    st.markdown("### Streaming info for Cardano")
     
-    currency_code = st.selectbox("Select currency", currency)
-    st.markdown(f"### Price change over time  for {table}")
+    currency_code = st.selectbox("Select currency", currencies)
+    st.markdown(f"### Price change over time {selected_coin}")
     
-    currency_rate = fetch_exchange_rates(rate=currency_code)
-    crypto_info(df, currency_code, currency_rate)
+    exchange_rate = fetch_exchange_rates(rate=currency_code)
+    crypto_info(df, currency_code, exchange_rate)
     
  
  

@@ -2,6 +2,10 @@ import streamlit as st
 from millify import millify
 from projektkollen.src.charts import line_chart
 import matplotlib.pyplot as plt
+
+from requests import Session, Timeout, TooManyRedirects
+import requests  
+import json
  
 def crypto_info(df, currency_code, currency_rate=1):
     price_chart = line_chart(x= df.index, y= (df["price_usd"] * currency_rate), title= f"price {currency_code}")
@@ -37,3 +41,20 @@ def crypto_info(df, currency_code, currency_rate=1):
         st.subheader("Percentage Change Trend")
         percent_chart = line_chart(x=df.index, y=df["percent_change"], title="1h Percent Change (%)")
         st.pyplot(percent_chart)
+
+
+def fetch_exchange_rates(base_currency="USD", rate ="SEK"):
+   
+    url = f"https://api.exchangerate-api.com/v4/latest/{base_currency}"
+    
+    session = Session()
+    
+    try:
+        response = session.get(url)
+        response.raise_for_status()
+        data = response.json()       
+        return data["rates"][rate]
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to obtain exchange rate: {e}")
+        return None
+    
